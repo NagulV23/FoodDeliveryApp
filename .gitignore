@@ -1,0 +1,13 @@
+bin/
+target/
+build/
+
+.settings/
+.project
+.classpath
+
+*.class
+*.log
+
+.idea/
+.vscode/

@@ -1,0 +1,15 @@
+package com.tap.dao;
+
+import com.tap.model.Restaurant;
+import java.util.List;
+
+public interface RestaurantDAO {
+    
+    void addRestaurant(Restaurant restaurant);
+    Restaurant getRestaurant(int restaurantId);           // existing
+    Restaurant getRestaurantById(int restaurantId);       // ← ADD THIS LINE
+    void updateRestaurant(Restaurant restaurant);
+    void deleteRestaurant(int restaurantId);
+    List<Restaurant> getAllRestaurants();
+    
+}

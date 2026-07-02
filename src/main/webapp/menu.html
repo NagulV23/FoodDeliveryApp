@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Restaurant Menu</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    background:#f4f4f4;
+}
+
+.header{
+    background:#ff6b35;
+    color:white;
+    text-align:center;
+    padding:20px;
+}
+
+.menu-container{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:25px;
+    padding:30px;
+}
+
+.card{
+    width:250px;
+    background:white;
+    border-radius:15px;
+    overflow:hidden;
+    box-shadow:0 4px 10px rgba(0,0,0,0.2);
+}
+
+.card img{
+    width:100%;
+    height:180px;
+    object-fit:cover;
+}
+
+.card-content{
+    padding:15px;
+}
+
+.card-content h3{
+    margin-bottom:10px;
+}
+
+.price{
+    color:#28a745;
+    font-weight:bold;
+    font-size:18px;
+    margin:10px 0;
+}
+
+.btn{
+    width:100%;
+    padding:10px;
+    border:none;
+    border-radius:8px;
+    background:#28a745;
+    color:white;
+    cursor:pointer;
+    font-size:16px;
+}
+
+.btn:hover{
+    background:#218838;
+}
+</style>
+
+</head>
+<body>
+
+<div class="header">
+    <h1>🍴 Restaurant Menu</h1>
+    <p>Choose your favorite food</p>
+</div>
+
+<div class="menu-container">
+
+    <div class="card">
+        <img src="images/dosa.jpg" alt="Masala Dosa">
+        <div class="card-content">
+            <h3>Masala Dosa</h3>
+            <p>Crispy dosa with potato masala.</p>
+            <div class="price">₹120</div>
+            <button class="btn">Add to Cart</button>
+        </div>
+    </div>
+
+    <div class="card">
+        <img src="images/biryani.jpg" alt="Chicken Biryani">
+        <div class="card-content">
+            <h3>Chicken Biryani</h3>
+            <p>Hyderabadi spicy chicken biryani.</p>
+            <div class="price">₹250</div>
+            <button class="btn">Add to Cart</button>
+        </div>
+    </div>
+
+    <div class="card">
+        <img src="images/burger.jpg" alt="Burger">
+        <div class="card-content">
+            <h3>Cheese Burger</h3>
+            <p>Loaded with cheese and veggies.</p>
+            <div class="price">₹180</div>
+            <button class="btn">Add to Cart</button>
+        </div>
+    </div>
+
+    <div class="card">
+        <img src="images/pizza.jpg" alt="Pizza">
+        <div class="card-content">
+            <h3>Veg Pizza</h3>
+            <p>Fresh vegetables with cheese.</p>
+            <div class="price">₹299</div>
+            <button class="btn">Add to Cart</button>
+        </div>
+    </div>
+
+    <div class="card">
+        <img src="images/noodles.jpg" alt="Noodles">
+        <div class="card-content">
+            <h3>Hakka Noodles</h3>
+            <p>Chinese style veg noodles.</p>
+            <div class="price">₹160</div>
+            <button class="btn">Add to Cart</button>
+        </div>
+    </div>
+
+    <div class="card">
+        <img src="images/icecream.jpg" alt="Ice Cream">
+        <div class="card-content">
+            <h3>Chocolate Ice Cream</h3>
+            <p>Rich chocolate delight.</p>
+            <div class="price">₹99</div>
+            <button class="btn">Add to Cart</button>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

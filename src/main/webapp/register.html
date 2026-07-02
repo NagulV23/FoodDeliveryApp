@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Foodie Registration</title>
+</head>
+<body style="margin:0; padding:0; background-color:#f4f4f4; font-family:Arial, sans-serif;">
+
+    <div style="width:400px; margin:50px auto; background:white; padding:30px; border-radius:15px; box-shadow:0px 4px 10px rgba(0,0,0,0.2);">
+
+        <h1 style="text-align:center; color:#ff6b35;">
+            🍴 Foodie
+        </h1>
+
+        <h2 style="text-align:center; margin-bottom:25px;">
+            User Registration
+        </h2>
+
+        <form action="callregisterservlet" method="post">
+
+            <label style="font-weight:bold;">Full Name</label><br>
+            <input type="text" name="name"
+                   placeholder="Enter Full Name"
+                   required
+                   style="width:100%; padding:10px; margin-top:5px; margin-bottom:15px; border:1px solid #ccc; border-radius:8px;">
+
+            <label style="font-weight:bold;">Username</label><br>
+            <input type="text" name="username"
+                   placeholder="Enter Username"
+                   required
+                   style="width:100%; padding:10px; margin-top:5px; margin-bottom:15px; border:1px solid #ccc; border-radius:8px;">
+
+            <label style="font-weight:bold;">Email</label><br>
+            <input type="email" name="email"
+                   placeholder="Enter Email"
+                   required
+                   style="width:100%; padding:10px; margin-top:5px; margin-bottom:15px; border:1px solid #ccc; border-radius:8px;">
+
+            <label style="font-weight:bold;">Phone Number</label><br>
+            <input type="tel" name="phone"
+                   placeholder="Enter Mobile Number"
+                   required
+                   style="width:100%; padding:10px; margin-top:5px; margin-bottom:15px; border:1px solid #ccc; border-radius:8px;">
+
+            <label style="font-weight:bold;">Address</label><br>
+            <textarea name="address"
+                      placeholder="Enter Address"
+                      rows="3"
+                      required
+                      style="width:100%; padding:10px; margin-top:5px; margin-bottom:15px; border:1px solid #ccc; border-radius:8px;"></textarea>
+
+            <label style="font-weight:bold;">Password</label><br>
+            <input type="password" name="password"
+                   placeholder="Enter Password"
+                   required
+                   style="width:100%; padding:10px; margin-top:5px; margin-bottom:15px; border:1px solid #ccc; border-radius:8px;">
+
+            <label style="font-weight:bold;">Confirm Password</label><br>
+            <input type="password" name="confirmPassword"
+                   placeholder="Confirm Password"
+                   required
+                   style="width:100%; padding:10px; margin-top:5px; margin-bottom:20px; border:1px solid #ccc; border-radius:8px;">
+
+            <button type="submit"
+                    style="width:100%; padding:12px; background-color:#ff6b35; color:white; border:none; border-radius:8px; font-size:16px; cursor:pointer;">
+                Register
+            </button>
+
+        </form>
+
+        <p style="text-align:center; margin-top:20px;">
+            Already have an account?
+            <a href="login.html" style="color:#ff6b35; text-decoration:none;">
+                Login
+            </a>
+        </p>
+
+    </div>
+
+</body>
+</html>
