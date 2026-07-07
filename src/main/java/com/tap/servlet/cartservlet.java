@@ -43,6 +43,8 @@ public class cartservlet extends HttpServlet {
             MenuDAOImpl dao = new MenuDAOImpl();
 
             Menu menu = dao.getMenu(menuId);
+            System.out.println("Menu Name  : " + menu.getItemName());
+            System.out.println("Image Path : " + menu.getImagePath());
 
             cartItem item = new cartItem(
                     menu.getMenuId(),
@@ -52,6 +54,7 @@ public class cartservlet extends HttpServlet {
                     1,
                     menu.getImagePath()
             );
+            System.out.println("Cart Image : " + item.getImagePath());
 
             cartObj.addItem(item);
         }

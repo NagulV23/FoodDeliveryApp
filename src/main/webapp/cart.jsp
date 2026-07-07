@@ -87,7 +87,7 @@ color:#333;
 .card{
 background:white;
 border-radius:15px;
-padding:20px;
+padding:30px;
 margin-bottom:20px;
 display:flex;
 justify-content:space-between;
@@ -97,7 +97,8 @@ transition:.3s;
 }
 
 .card:hover{
-transform:translateY(-6px);
+ transform:translateY(-8px);
+    box-shadow:0 12px 30px rgba(0,0,0,.18);
 }
 
 .food{
@@ -107,10 +108,11 @@ gap:20px;
 }
 
 .food img{
-width:120px;
-height:120px;
-border-radius:12px;
-object-fit:cover;
+    width:150px;
+    height:150px;
+    border-radius:15px;
+    object-fit:cover;
+    box-shadow:0 6px 15px rgba(0,0,0,.15);
 }
 
 .food-details h3{
@@ -141,8 +143,11 @@ transition:.3s;
 }
 
 .plus{
-background:#28a745;
-color:white;
+width:50px;
+    height:50px;
+    border-radius:50%;
+    font-size:22px;
+    font-weight:bold;
 }
 
 .plus:hover{
@@ -150,7 +155,11 @@ background:#1e7e34;
 }
 
 .minus{
-background:#ffc107;
+width:50px;
+    height:50px;
+    border-radius:50%;
+    font-size:22px;
+    font-weight:bold;
 }
 
 .minus:hover{
@@ -160,6 +169,9 @@ background:#e0a800;
 .delete{
 background:#dc3545;
 color:white;
+    padding:14px 20px;
+    border-radius:25px;
+    font-weight:bold;
 }
 
 .delete:hover{
@@ -171,8 +183,8 @@ background:#b02a37;
 
 background:white;
 padding:25px;
-border-radius:15px;
-box-shadow:0 6px 20px rgba(0,0,0,.12);
+   border-radius:20px;
+    box-shadow:0 10px 30px rgba(0,0,0,.12);
 position:sticky;
 top:100px;
 
@@ -425,8 +437,9 @@ subtotal+=itemTotal;
 <div class="food">
 
 <img
-src="<%=request.getContextPath()%>/images/food.png"
-alt="<%=item.getName()%>">
+    src="<%=request.getContextPath()%>/images/<%=item.getImagePath()%>"
+    alt="<%=item.getName()%>"
+    style="width:120px;height:120px;object-fit:cover;border-radius:12px;">
 <div class="food-details">
 
 <h3><%=item.getName()%></h3>
