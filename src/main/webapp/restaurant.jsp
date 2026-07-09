@@ -79,24 +79,31 @@ body{
 /* Restaurant Cards */
 
 .restaurant-container{
-    display:flex;
-    flex-wrap:wrap;
-    justify-content:center;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
     gap:25px;
     padding:30px;
+    max-width:1300px;
+    margin:auto;
+}
+
+.restaurant-link{
+    text-decoration:none;
+    color:black;
 }
 
 .card{
-    width:280px;
-    background:white;
+    width:100%;
+    background:#fff;
     border-radius:15px;
     overflow:hidden;
-    box-shadow:0px 4px 10px rgba(0,0,0,0.2);
-    transition:0.3s;
+    box-shadow:0 5px 15px rgba(0,0,0,.15);
+    transition:.3s;
 }
 
 .card:hover{
-    transform:translateY(-5px);
+    transform:translateY(-8px);
+    box-shadow:0 10px 25px rgba(0,0,0,.2);
 }
 
 .card img{
@@ -192,9 +199,9 @@ if(allRestaurants != null && !allRestaurants.isEmpty()){
 
     <div class="card">
 
-        <img
-        src="<%= request.getContextPath() %>/images/<%= restaurant.getImagePath() %>"
-        alt="<%= restaurant.getName() %>">
+   <img
+src="<%= request.getContextPath() %>/images/<%= restaurant.getImagePath() %>"
+alt="<%= restaurant.getName() %>">
 
         <div class="card-content">
 

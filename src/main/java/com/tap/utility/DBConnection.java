@@ -7,31 +7,40 @@ public class DBConnection {
 
     private static final String URL =
             System.getenv().getOrDefault(
-                "DB_URL",
-                "jdbc:mysql://localhost:3306/food_delivery_application"
+                    "DB_URL",
+                    "jdbc:mysql://localhost:3306/food_delivery_application"
             );
 
     private static final String USERNAME =
             System.getenv().getOrDefault(
-                "DB_USERNAME",
-                "root"
+                    "DB_USERNAME",
+                    "root"
             );
 
     private static final String PASSWORD =
             System.getenv().getOrDefault(
-                "DB_PASSWORD",
-                ""
+                    "DB_PASSWORD",
+                    "root"
             );
 
-    private static Connection connection;
-
     public static Connection getConnection() {
+
         try {
+
             Class.forName("com.mysql.cj.jdbc.Driver");
-            connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+
+            System.out.println("DB URL : " + URL);
+
+            Connection connection =
+                    DriverManager.getConnection(URL, USERNAME, PASSWORD);
+
+            System.out.println("Database Connected Successfully");
+
+            return connection;
+
         } catch (Exception e) {
             e.printStackTrace();
+            return null;
         }
-        return connection;
     }
 }

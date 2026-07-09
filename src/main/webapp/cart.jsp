@@ -437,8 +437,8 @@ subtotal+=itemTotal;
 <div class="food">
 
 <img
-    src="<%=request.getContextPath()%>/images/<%=item.getImagePath()%>"
-    alt="<%=item.getName()%>"
+    src="<%= request.getContextPath() %>/<%= item.getImagePath() %>"
+    alt="<%= item.getName() %>"
     style="width:120px;height:120px;object-fit:cover;border-radius:12px;">
 <div class="food-details">
 

@@ -121,20 +121,18 @@ public class RestaurantDAOImpl implements RestaurantDAO {
 
         try (Connection connection = DBConnection.getConnection();
              Statement statement = connection.createStatement();
-             ResultSet res = statement.executeQuery(GET_ALL_RESTAURANTS_QUERY)) {
+             ResultSet res = statement.executeQuery("SELECT * FROM restaurant")) {
 
             while (res.next()) {
-                Restaurant restaurant = extractRestaurant(res);
-                restaurantList.add(restaurant);
+                restaurantList.add(extractRestaurant(res));
             }
 
-        } catch (SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
         return restaurantList;
     }
-
     private Restaurant extractRestaurant(ResultSet res) throws SQLException {
 
         int restaurantId = res.getInt("restaurantId");
@@ -157,7 +155,6 @@ public class RestaurantDAOImpl implements RestaurantDAO {
                 imagePath
         );
     }
-
     @Override
     public Restaurant getRestaurantById(int restaurantId) {
         Restaurant restaurant = null;

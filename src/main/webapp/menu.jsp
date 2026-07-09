@@ -215,10 +215,9 @@ if(allMenusByRestaurant != null &&
 %>
     <div class="card">
 
-        <img
-            src="<%= request.getContextPath() %>/images/<%= menu.getImagePath() %>"
-            alt="<%= menu.getItemName() %>">
-
+<img
+    src="<%= request.getContextPath() %>/<%= menu.getImagePath() %>"
+    alt="<%= menu.getItemName() %>">
         <div class="card-content">
 
             <h3>

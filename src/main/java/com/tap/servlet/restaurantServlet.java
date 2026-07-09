@@ -22,15 +22,19 @@ throws ServletException, IOException {
 
 //System.out.println("Restaurant Servlet Called");
 
-RestaurantDAOImpl dao = new RestaurantDAOImpl();
+		RestaurantDAOImpl dao = new RestaurantDAOImpl();
 
-List<Restaurant> allRestaurants = dao.getAllRestaurants();
+		List<Restaurant> allRestaurants = dao.getAllRestaurants();
 
-//System.out.println("Restaurant Count = " + allRestaurants.size());
+		System.out.println("Restaurant Size = " + allRestaurants.size());
 
-req.setAttribute("allRestaurants", allRestaurants);
+		for (Restaurant r : allRestaurants) {
+		    System.out.println(r);
+		}
 
-RequestDispatcher rd =req.getRequestDispatcher("restaurant.jsp");
-rd.forward(req, resp);
+		req.setAttribute("allRestaurants", allRestaurants);
+
+		RequestDispatcher rd = req.getRequestDispatcher("restaurant.jsp");
+		rd.forward(req, resp);
 }
 }
