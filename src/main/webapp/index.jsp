@@ -4,4 +4,3 @@
 <%
 response.sendRedirect("home.jsp");
 %>
-<a href="<%=request.getContextPath()%>/index.jsp">Home</a>

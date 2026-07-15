@@ -32,6 +32,9 @@ public class MenuDAOImpl implements MenuDAO {
     private static final String GET_MENUS_BY_RESTAURANT_QUERY =
             "SELECT * FROM menu WHERE restaurantId = ?";
 
+    private static final String SEARCH_MENUS_QUERY =
+            "SELECT * FROM menu WHERE LOWER(itemName) LIKE ?";
+
     @Override
     public void addMenu(Menu menu) {
 
@@ -163,7 +166,8 @@ public class MenuDAOImpl implements MenuDAO {
     @Override
     public List<Menu> getAllMenusByRestaurant(int restaurantId) {
 
-        List<Menu> menuList = new ArrayList<>();
+        // Use LinkedHashMap to preserve insertion order and deduplicate by item name
+        java.util.LinkedHashMap<String, Menu> uniqueMenus = new java.util.LinkedHashMap<>();
 
         try (Connection connection = DBConnection.getConnection();
              PreparedStatement preparedStatement =
@@ -175,8 +179,45 @@ public class MenuDAOImpl implements MenuDAO {
 
             while (res.next()) {
                 Menu menu = extractMenu(res);
-                menuList.add(menu);
+                // Use item name as key — keeps first occurrence, ignores duplicates
+                String nameKey = menu.getItemName() != null ? menu.getItemName().toLowerCase().trim() : "";
+                uniqueMenus.putIfAbsent(nameKey, menu);
             }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return new ArrayList<>(uniqueMenus.values());
+    }
+
+    @Override
+    public List<Menu> searchMenuItems(String keyword) {
+
+        List<Menu> menuList = new ArrayList<>();
+
+        if (keyword == null || keyword.trim().isEmpty()) {
+            return menuList;
+        }
+
+        try (Connection connection = DBConnection.getConnection();
+             PreparedStatement preparedStatement =
+                     connection.prepareStatement(SEARCH_MENUS_QUERY)) {
+
+            preparedStatement.setString(1, "%" + keyword.toLowerCase().trim() + "%");
+
+            ResultSet res = preparedStatement.executeQuery();
+
+            // Use LinkedHashMap to deduplicate by item name + restaurant
+            java.util.LinkedHashMap<String, Menu> uniqueResults = new java.util.LinkedHashMap<>();
+
+            while (res.next()) {
+                Menu menu = extractMenu(res);
+                String key = menu.getRestaurantId() + "_" + (menu.getItemName() != null ? menu.getItemName().toLowerCase().trim() : "");
+                uniqueResults.putIfAbsent(key, menu);
+            }
+
+            menuList = new ArrayList<>(uniqueResults.values());
 
         } catch (SQLException e) {
             e.printStackTrace();

@@ -16,4 +16,6 @@ public interface MenuDAO {
     List<Menu> getAllMenus();
 
     List<Menu> getAllMenusByRestaurant(int restaurantId);
+    
+    List<Menu> searchMenuItems(String keyword);
 }

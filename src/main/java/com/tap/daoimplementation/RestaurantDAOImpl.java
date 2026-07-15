@@ -117,21 +117,25 @@ public class RestaurantDAOImpl implements RestaurantDAO {
     @Override
     public List<Restaurant> getAllRestaurants() {
 
-        List<Restaurant> restaurantList = new ArrayList<>();
+        // Use LinkedHashMap to preserve insertion order and deduplicate by name
+        java.util.LinkedHashMap<String, Restaurant> uniqueRestaurants = new java.util.LinkedHashMap<>();
 
         try (Connection connection = DBConnection.getConnection();
              Statement statement = connection.createStatement();
              ResultSet res = statement.executeQuery("SELECT * FROM restaurant")) {
 
             while (res.next()) {
-                restaurantList.add(extractRestaurant(res));
+                Restaurant restaurant = extractRestaurant(res);
+                // Use name as key — keeps first occurrence, ignores duplicates
+                String nameKey = restaurant.getName() != null ? restaurant.getName().toLowerCase().trim() : "";
+                uniqueRestaurants.putIfAbsent(nameKey, restaurant);
             }
 
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        return restaurantList;
+        return new ArrayList<>(uniqueRestaurants.values());
     }
     private Restaurant extractRestaurant(ResultSet res) throws SQLException {
 
@@ -154,23 +158,5 @@ public class RestaurantDAOImpl implements RestaurantDAO {
                 isActive,
                 imagePath
         );
-    }
-    @Override
-    public Restaurant getRestaurantById(int restaurantId) {
-        Restaurant restaurant = null;
-        try (Connection connection = DBConnection.getConnection();
-             PreparedStatement preparedStatement = 
-                     connection.prepareStatement("SELECT * FROM restaurant WHERE restaurantId = ?")) {
-            
-            preparedStatement.setInt(1, restaurantId);
-            ResultSet res = preparedStatement.executeQuery();
-            
-            if (res.next()) {
-                restaurant = extractRestaurant(res);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return restaurant;
     }
 }

@@ -8,6 +8,7 @@ import com.tap.daoimplementation.OrderItemDAOImpl;
 import com.tap.daoimplementation.OrderTableDAOImpl;
 import com.tap.daoimplementation.RestaurantDAOImpl;
 import com.tap.model.OrderTable;
+import com.tap.model.User;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -27,34 +28,29 @@ public class OrderHistoryServlet extends HttpServlet {
 
         HttpSession session = request.getSession();
 
-        /*
-         * Replace this with your logged-in user's ID.
-         * Example:
-         *
-         * User user = (User) session.getAttribute("loggedInUser");
-         * int userId = user.getUserId();
-         */
+        // Get the actual logged-in user from session
+        User loggedInUser = (User) session.getAttribute("loggedInUser");
 
-        int userId = 1;   // Temporary until login integration
+        int userId = (loggedInUser != null) ? loggedInUser.getUserId() : -1;
 
         OrderTableDAOImpl orderDAO = new OrderTableDAOImpl();
 
         List<OrderTable> orderList =
                 orderDAO.getOrdersByUserId(userId);
 
+        RestaurantDAOImpl restaurantDAO = new RestaurantDAOImpl();
+        MenuDAOImpl menuDAO = new MenuDAOImpl();
+        OrderItemDAOImpl orderItemDAO = new OrderItemDAOImpl();
+
         request.setAttribute("orderList", orderList);
+        request.setAttribute("restaurantDAO", restaurantDAO);
+        request.setAttribute("menuDAO", menuDAO);
+        request.setAttribute("orderItemDAO", orderItemDAO);
 
         RequestDispatcher rd =
                 request.getRequestDispatcher("myOrders.jsp");
 
         rd.forward(request, response);
-        RestaurantDAOImpl restaurantDAO = new RestaurantDAOImpl();
-        MenuDAOImpl menuDAO = new MenuDAOImpl();
-        OrderItemDAOImpl orderItemDAO = new OrderItemDAOImpl();
-
-        request.setAttribute("restaurantDAO", restaurantDAO);
-        request.setAttribute("menuDAO", menuDAO);
-        request.setAttribute("orderItemDAO", orderItemDAO);
     }
 
     @Override

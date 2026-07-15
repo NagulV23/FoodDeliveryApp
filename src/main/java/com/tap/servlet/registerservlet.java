@@ -44,6 +44,6 @@ public class registerservlet extends HttpServlet {
 
         dao.addUser(user);
 
-        response.sendRedirect("login.html");
+        response.sendRedirect("login.jsp");
     }
 }

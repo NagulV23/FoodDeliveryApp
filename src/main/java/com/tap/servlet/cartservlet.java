@@ -43,8 +43,6 @@ public class cartservlet extends HttpServlet {
             MenuDAOImpl dao = new MenuDAOImpl();
 
             Menu menu = dao.getMenu(menuId);
-            System.out.println("Menu Name  : " + menu.getItemName());
-            System.out.println("Image Path : " + menu.getImagePath());
 
             cartItem item = new cartItem(
                     menu.getMenuId(),
@@ -54,9 +52,22 @@ public class cartservlet extends HttpServlet {
                     1,
                     menu.getImagePath()
             );
-            System.out.println("Cart Image : " + item.getImagePath());
 
             cartObj.addItem(item);
+            
+            // AJAX support - return JSON instead of redirect
+            String ajax = request.getParameter("ajax");
+            if("true".equals(ajax)) {
+                response.setContentType("application/json");
+                response.setCharacterEncoding("UTF-8");
+                int cartCount = cartObj.getItems().size();
+                String itemName = menu.getItemName() != null ? menu.getItemName() : "Item";
+                // Escape special chars for JSON safety
+                itemName = itemName.replace("\\", "\\\\").replace("\"", "\\\"");
+                String json = "{\"success\":true,\"cartCount\":" + cartCount + ",\"itemName\":\"" + itemName + "\"}";
+                response.getWriter().write(json);
+                return;
+            }
         }
 
         // UPDATE QUANTITY

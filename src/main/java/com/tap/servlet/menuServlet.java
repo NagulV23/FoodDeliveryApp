@@ -48,7 +48,7 @@ public class menuServlet extends HttpServlet {
                     new RestaurantDAOImpl();
 
             Restaurant restaurant =
-                    restaurantDAO.getRestaurantById(restaurantId);
+                    restaurantDAO.getRestaurant(restaurantId);
 
             // ==============================
             // Fetch Menu Items

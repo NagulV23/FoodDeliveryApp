@@ -1,0 +1,45 @@
+services:
+  # ==================== MYSQL DATABASE ====================
+  db:
+    image: mysql:8.0
+    container_name: foodie-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: food_delivery_application
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./db-init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - foodie-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-proot"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ==================== TOMCAT APPLICATION ====================
+  app:
+    build: .
+    container_name: foodie-app
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    environment:
+      DB_URL: jdbc:mysql://db:3306/food_delivery_application?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+      DB_USERNAME: root
+      DB_PASSWORD: root
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - foodie-network
+
+networks:
+  foodie-network:
+    driver: bridge
+
+volumes:
+  mysql_data:
